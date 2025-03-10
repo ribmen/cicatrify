@@ -56,7 +56,7 @@ export default function SignUp() {
                 </Pressable>
 
                 <Text style={styles.logoText}>
-                  Finance<Text style={{ color: colors.green }}>Plus</Text>
+                  Finance<Text style={{ color: colors.purple60 }}>Plus</Text>
                 </Text>
                 <Text style={styles.slogan}>Soluções de crédito simplificadas.</Text>
                 <Text style={styles.slogan}>Criar uma conta</Text>

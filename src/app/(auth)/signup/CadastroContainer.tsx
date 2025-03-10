@@ -7,9 +7,8 @@ import {
   Platform, 
   ScrollView 
 } from "react-native";
-import { BackgroundShapes } from "./BackgroundShape";
-import { WelcomeText } from "./LoginComponents";
-import LoginCard from "./LoginComponents";
+import CadastroCard from "./CadastroComponents";
+import CadastroHeader from "./CadastroHeader";
 
 const LoginContainer: React.FC = () => {
   return (
@@ -18,9 +17,8 @@ const LoginContainer: React.FC = () => {
           style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps="handled">
         <View style={styles.container}>
-          <BackgroundShapes />
-          <WelcomeText />
-          <LoginCard />
+          <CadastroHeader />
+          <CadastroCard />
         </View>
         </ScrollView>
     </KeyboardAvoidingView>

@@ -49,7 +49,7 @@ function MainLayout() {
       />
 
       <Stack.Screen
-        name="(auth)/signup/page"
+        name="(auth)/signup/CadastroContainer"
         options={{ headerShown: false }}
       />
 

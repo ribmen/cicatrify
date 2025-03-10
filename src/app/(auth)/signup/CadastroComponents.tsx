@@ -4,13 +4,6 @@ import { supabase } from "@/src/lib/supabase";
 import { router } from "expo-router";
 import { Ubuntu } from "@/src/constants/fonts";
 
-export const WelcomeText: React.FC = () => (
-  <View style={styles.welcomeContainer}>
-    <Text style={styles.welcomeText}>Bem-vindo ao <Text style={styles.cicatrifyText}>cicatrify!</Text></Text>
-    
-  </View>
-);
-
 interface InputFieldProps {
   label: string;
   value: string;
@@ -31,55 +24,53 @@ const InputField: React.FC<InputFieldProps> = ({ label, value, onChangeText, sec
   </View>
 );
 
-const LoginButton: React.FC<{ onPress: () => void; loading: boolean }> = ({ onPress, loading }) => (
-  <TouchableOpacity style={styles.loginButton} onPress={onPress} disabled={loading}>
-    <Text style={styles.loginButtonText}>{loading ? "Carregando..." : "Fazer Login"}</Text>
+const CadastroButton: React.FC<{ onPress: () => void; loading: boolean }> = ({ onPress, loading }) => (
+  <TouchableOpacity style={styles.cadastroButton} onPress={onPress} disabled={loading}>
+    <Text style={styles.cadastroButtonText}>{loading ? "Carregando..." : "Cadastrar"}</Text>
   </TouchableOpacity>
 );
 
-const SignupSection: React.FC = () => (
-  <View style={styles.signupContainer}>
-    <Text style={styles.dividerText}>ou</Text>
-    <TouchableOpacity style={styles.signupButton} onPress={() => router.push("/(auth)/signup/CadastroContainer")}>
-      <Text style={styles.signupButtonText}>Cadastre-se</Text>
-    </TouchableOpacity>
-  </View>
-);
 
 export default function LoginCard() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  async function handleSignIn() {
+  async function handleSignUp() {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
+
+    const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: { data: { name } }
     });
 
     if (error) {
-      Alert.alert("Erro", error.message);
+      Alert.alert('Erro', error.message);
       setLoading(false);
       return;
     }
 
     setLoading(false);
-    router.replace("/(panel)/profile/page");
+    router.replace('/(auth)/signin/LoginContainer');
   }
 
   return (
     <View style={styles.cardContainer}>
       <View style={styles.headerContainer}>
-        <Text style={styles.headerTitle}>Login</Text>
-        <Text style={styles.headerSubtitle}>Por favor, faça login para continuar</Text>
+        <Text style={styles.headerTitle}>Cadastro</Text>
+        <Text style={styles.headerSubtitle}>Cadastre-se e tenha acesso ao <Text style={styles.cicatrifySubtitle}>cicatrify</Text></Text>
       </View>
 
-      <InputField label="Usuário" value={email} onChangeText={setEmail} />
+      <InputField label="Nome completo" value={name} onChangeText={setName} />
+      <InputField label="E-mail" value={email} onChangeText={setEmail} />
+      <InputField label="Usuário" value={user} onChangeText={setUser} />
       <InputField label="Senha" value={password} onChangeText={setPassword} secureTextEntry />
+      <InputField label="Confirme a senha" value={password} onChangeText={setPassword} secureTextEntry />
 
-      <LoginButton onPress={handleSignIn} loading={loading} />
-      <SignupSection />
+      <CadastroButton onPress={handleSignUp} loading={loading} />
     </View>
   );
 }
@@ -105,7 +96,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     display: 'flex',
-    top: 360,
+    top: 100,
     marginLeft: 'auto',
     marginRight: 'auto',
     width: 345,
@@ -126,7 +117,13 @@ const styles = StyleSheet.create({
   },
   headerSubtitle: {
     color: "#4A4063",
-    fontFamily: "Ubuntu",
+    fontFamily: Ubuntu.regular,
+    fontSize: 14,
+    fontWeight: "400",
+  },
+  cicatrifySubtitle: {
+    color: "#4A4063",
+    fontFamily: Ubuntu.bold,
     fontSize: 14,
     fontWeight: "400",
   },
@@ -151,14 +148,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "400",
   },
-  loginButton: {
+  cadastroButton: {
     height: 56,
     borderRadius: 10,
     backgroundColor: "#783F8E",
     justifyContent: "center",
     alignItems: "center",
   },
-  loginButtonText: {
+  cadastroButtonText: {
     color: "#FFF",
     fontFamily: "Ubuntu",
     fontSize: 18,
