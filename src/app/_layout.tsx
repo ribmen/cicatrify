@@ -26,7 +26,7 @@ function MainLayout() {
       
       if(session) {
         setAuth(session.user) // pega os dados da sessão
-        router.replace('/(panel)/profile/page')
+        router.replace('/(panel)/profile/PacientesScreen/page')
         return;
       }
 
@@ -54,12 +54,19 @@ function MainLayout() {
       />
 
       <Stack.Screen
-        name="(panel)/profile/page"
-        options={{ headerShown: true, title: 'Pacientes', headerTitleStyle: {
-          fontWeight: "bold",
-          fontSize: globalStyles.large,
-        } }}
+        name="(panel)/profile/PacientesScreen/page"
+        options={{ 
+          headerShown: false
+        }}
       />
+      
+      <Stack.Screen
+        name="(panel)/profile/NovoPacienteScreen/page"
+        options={{ 
+          headerShown: false
+        }}
+      />
+
     </Stack>
   )
 }

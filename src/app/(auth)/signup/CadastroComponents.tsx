@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, KeyboardTypeOptions } from "react-native";
 import { supabase } from "@/src/lib/supabase";
 import { router } from "expo-router";
 import { Ubuntu } from "@/src/constants/fonts";
@@ -9,9 +9,11 @@ interface InputFieldProps {
   value: string;
   onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
+  keyboardType?: KeyboardTypeOptions;
+  autoCapitalize?: "none" | "sentences" | "words" | "characters" | undefined;
 }
 
-const InputField: React.FC<InputFieldProps> = ({ label, value, onChangeText, secureTextEntry }) => (
+const InputField: React.FC<InputFieldProps> = ({ label, value, onChangeText, secureTextEntry, keyboardType, autoCapitalize }) => (
   <View style={styles.inputContainer}>
     <Text style={styles.inputLabel}>{label}</Text>
     <TextInput
@@ -20,6 +22,8 @@ const InputField: React.FC<InputFieldProps> = ({ label, value, onChangeText, sec
       onChangeText={onChangeText}
       secureTextEntry={secureTextEntry}
       placeholderTextColor="#C9C6D7"
+      keyboardType={keyboardType}
+      autoCapitalize={autoCapitalize}
     />
   </View>
 );
@@ -34,21 +38,31 @@ const CadastroButton: React.FC<{ onPress: () => void; loading: boolean }> = ({ o
 export default function LoginCard() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [user, setUser] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
   async function handleSignUp() {
     setLoading(true);
 
+    if (password !== confirmPassword) {
+      Alert.alert("Erro", "As senhas não coincidem.");
+      return;
+    }
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { name } }
+      options: { 
+        data: {
+          name,
+        } 
+      }
     });
 
     if (error) {
-      Alert.alert('Erro', error.message);
+      Alert.alert('Erro', error.code);
       setLoading(false);
       return;
     }
@@ -65,10 +79,10 @@ export default function LoginCard() {
       </View>
 
       <InputField label="Nome completo" value={name} onChangeText={setName} />
-      <InputField label="E-mail" value={email} onChangeText={setEmail} />
-      <InputField label="Usuário" value={user} onChangeText={setUser} />
+      <InputField keyboardType="email-address" autoCapitalize="none" label="E-mail" value={email} onChangeText={setEmail} />
+      <InputField label="Usuário" autoCapitalize="none" value={username} onChangeText={setUsername} />
       <InputField label="Senha" value={password} onChangeText={setPassword} secureTextEntry />
-      <InputField label="Confirme a senha" value={password} onChangeText={setPassword} secureTextEntry />
+      <InputField label="Confirme a senha" value={confirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
 
       <CadastroButton onPress={handleSignUp} loading={loading} />
     </View>

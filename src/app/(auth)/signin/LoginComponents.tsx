@@ -65,7 +65,7 @@ export default function LoginCard() {
     }
 
     setLoading(false);
-    router.replace("/(panel)/profile/page");
+    router.replace("/(panel)/profile/PacientesScreen/page");
   }
 
   return (
