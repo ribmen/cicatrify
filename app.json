@@ -30,6 +30,40 @@
     "plugins": [
       "expo-router"
     ],
+    "fonts": [
+      {
+        "name": "Ubuntu-Bold",
+        "file": "./assets/fonts/Ubuntu-Bold.ttf"
+      },
+      {
+        "name": "Ubuntu-BoldItalic",
+        "file": "./assets/fonts/Ubuntu-BoldItalic.ttf"
+      },
+      {
+        "name": "Ubuntu-Italic",
+        "file": "./assets/fonts/Ubuntu-Italic.ttf"
+      },
+      {
+        "name": "Ubuntu-Light",
+        "file": "./assets/fonts/Ubuntu-Light.ttf"
+      },
+      {
+        "name": "Ubuntu-LightItalic",
+        "file": "./assets/fonts/Ubuntu-LightItalic.ttf"
+      },
+      {
+        "name": "Ubuntu-Medium",
+        "file": "./assets/fonts/Ubuntu-Medium.ttf"
+      },
+      {
+        "name": "Ubuntu-MediumItalic",
+        "file": "./assets/fonts/Ubuntu-MediumItalic.ttf"
+      },
+      {
+        "name": "Ubuntu-Regular",
+        "file": "./assets/fonts/Ubuntu-Regular.ttf"
+      }
+    ],
     "experiments": {
       "typedRoutes": true
     }

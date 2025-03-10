@@ -1,0 +1,2 @@
+export const SUPABASE_URL = "https://wnhieyawdilibrgegkud.supabase.co"
+export const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InduaGlleWF3ZGlsaWJyZ2Vna3VkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE0NTk1MzQsImV4cCI6MjA1NzAzNTUzNH0.GRpEkY20pK517zx72pdYM4u8RSplZT2Ctlu8LPoRErI"

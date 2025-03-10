@@ -1,0 +1,187 @@
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from "react-native";
+import { supabase } from "@/src/lib/supabase";
+import { router } from "expo-router";
+import { Ubuntu } from "@/src/constants/fonts";
+
+export const WelcomeText: React.FC = () => (
+  <View style={styles.welcomeContainer}>
+    <Text style={styles.welcomeText}>Bem-vindo ao</Text>
+    <Text style={styles.cicatrifyText}>cicatrify!</Text>
+  </View>
+);
+
+interface InputFieldProps {
+  label: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  secureTextEntry?: boolean;
+}
+
+const InputField: React.FC<InputFieldProps> = ({ label, value, onChangeText, secureTextEntry }) => (
+  <View style={styles.inputContainer}>
+    <Text style={styles.inputLabel}>{label}</Text>
+    <TextInput
+      style={styles.inputValue}
+      value={value}
+      onChangeText={onChangeText}
+      secureTextEntry={secureTextEntry}
+      placeholderTextColor="#C9C6D7"
+    />
+  </View>
+);
+
+const LoginButton: React.FC<{ onPress: () => void; loading: boolean }> = ({ onPress, loading }) => (
+  <TouchableOpacity style={styles.loginButton} onPress={onPress} disabled={loading}>
+    <Text style={styles.loginButtonText}>{loading ? "Carregando..." : "Fazer Login"}</Text>
+  </TouchableOpacity>
+);
+
+const SignupSection: React.FC = () => (
+  <View style={styles.signupContainer}>
+    <Text style={styles.dividerText}>ou</Text>
+    <TouchableOpacity style={styles.signupButton} onPress={() => router.push("/(auth)/signup/page")}>
+      <Text style={styles.signupButtonText}>Cadastre-se</Text>
+    </TouchableOpacity>
+  </View>
+);
+
+export default function LoginCard() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSignIn() {
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      Alert.alert("Erro", error.message);
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+    router.replace("/(panel)/profile/page");
+  }
+
+  return (
+    <View style={styles.cardContainer}>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerTitle}>Login</Text>
+        <Text style={styles.headerSubtitle}>Por favor, faça login para continuar</Text>
+      </View>
+
+      <InputField label="Usuário" value={email} onChangeText={setEmail} />
+      <InputField label="Senha" value={password} onChangeText={setPassword} secureTextEntry />
+
+      <LoginButton onPress={handleSignIn} loading={loading} />
+      <SignupSection />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  welcomeContainer: {
+    position: "absolute",
+    top: 64,
+    left: 48,
+  },
+  welcomeText: {
+    fontFamily: Ubuntu.regular,
+    fontSize: 26,
+    fontWeight: "700",
+    color: "#F1F1F1",
+  },
+  cicatrifyText: {
+    fontFamily: Ubuntu.bold,
+    fontSize: 26,
+    fontWeight: "700",
+    color: "#F1F1F1",
+  },
+  cardContainer: {
+    position: "absolute",
+    top: 332,
+    left: 24,
+    width: 345,
+    padding: 24,
+    borderRadius: 14,
+    backgroundColor: "#F1F1F1",
+    gap: 24,
+  },
+  headerContainer: {
+    gap: 8,
+  },
+  headerTitle: {
+    color: "#2C263C",
+    fontFamily: "Ubuntu",
+    fontSize: 26,
+    fontWeight: "700",
+  },
+  headerSubtitle: {
+    color: "#4A4063",
+    fontFamily: "Ubuntu",
+    fontSize: 14,
+    fontWeight: "400",
+  },
+  inputContainer: {
+    height: 56,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderColor: "#C9C6D7",
+    borderRadius: 10,
+    gap: 8,
+  },
+  inputLabel: {
+    color: "#C9C6D7",
+    fontFamily: "Ubuntu",
+    fontSize: 10,
+    fontWeight: "400",
+  },
+  inputValue: {
+    color: "#4A4063",
+    fontFamily: "Ubuntu",
+    fontSize: 16,
+    fontWeight: "400",
+  },
+  loginButton: {
+    height: 56,
+    borderRadius: 10,
+    backgroundColor: "#783F8E",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loginButtonText: {
+    color: "#FFF",
+    fontFamily: "Ubuntu",
+    fontSize: 18,
+    fontWeight: "700",
+  },
+  signupContainer: {
+    alignItems: "center",
+    gap: 8,
+    width: "100%",
+  },
+  dividerText: {
+    color: "#C9C6D7",
+    fontFamily: "Ubuntu",
+    fontSize: 16,
+    fontWeight: "400",
+  },
+  signupButton: {
+    height: 56,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  signupButtonText: {
+    color: "#783F8E",
+    fontFamily: "Ubuntu",
+    fontSize: 16,
+    fontWeight: "500",
+  },
+});
