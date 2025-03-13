@@ -3,30 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert, KeyboardTyp
 import { supabase } from "@/src/lib/supabase";
 import { router } from "expo-router";
 import { Ubuntu } from "@/src/constants/fonts";
-
-interface InputFieldProps {
-  label: string;
-  value: string;
-  onChangeText: (text: string) => void;
-  secureTextEntry?: boolean;
-  keyboardType?: KeyboardTypeOptions;
-  autoCapitalize?: "none" | "sentences" | "words" | "characters" | undefined;
-}
-
-const InputField: React.FC<InputFieldProps> = ({ label, value, onChangeText, secureTextEntry, keyboardType, autoCapitalize }) => (
-  <View style={styles.inputContainer}>
-    <Text style={styles.inputLabel}>{label}</Text>
-    <TextInput
-      style={styles.inputValue}
-      value={value}
-      onChangeText={onChangeText}
-      secureTextEntry={secureTextEntry}
-      placeholderTextColor="#C9C6D7"
-      keyboardType={keyboardType}
-      autoCapitalize={autoCapitalize}
-    />
-  </View>
-);
+import { InputFieldProps } from "@/src/interfaces/InputFieldProps";
+import { InputField } from "@/src/components/InputField";
 
 const CadastroButton: React.FC<{ onPress: () => void; loading: boolean }> = ({ onPress, loading }) => (
   <TouchableOpacity style={styles.cadastroButton} onPress={onPress} disabled={loading}>
@@ -35,7 +13,7 @@ const CadastroButton: React.FC<{ onPress: () => void; loading: boolean }> = ({ o
 );
 
 
-export default function LoginCard() {
+export default function CadastroCard() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -141,27 +119,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "400",
   },
-  inputContainer: {
-    height: 56,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderWidth: 1,
-    borderColor: "#C9C6D7",
-    borderRadius: 10,
-    gap: 8,
-  },
-  inputLabel: {
-    color: "#C9C6D7",
-    fontFamily: "Ubuntu",
-    fontSize: 10,
-    fontWeight: "400",
-  },
-  inputValue: {
-    color: "#4A4063",
-    fontFamily: "Ubuntu",
-    fontSize: 16,
-    fontWeight: "400",
-  },
+  
   cadastroButton: {
     height: 56,
     borderRadius: 10,

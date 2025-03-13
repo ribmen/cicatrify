@@ -67,6 +67,13 @@ function MainLayout() {
         }}
       />
 
+      <Stack.Screen
+        name="(panel)/profile/NovoPacienteScreen/TestForm.tsx"
+        options={{ 
+          headerShown: false
+        }}
+      />
+
     </Stack>
   )
 }

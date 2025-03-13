@@ -8,6 +8,7 @@ import {
   View 
 } from 'react-native';
 import globalStyles from '../constants/globalStyles';
+import { Ubuntu } from '../constants/fonts';
 
 interface GenericHeaderProps {
   title?: string;
@@ -39,6 +40,7 @@ const GenericHeader: React.FC<GenericHeaderProps> = ({title, hasArrowBack}) => {
 const styles = StyleSheet.create({
     header: {
       display: 'flex',
+      position: 'fixed',
       flexDirection: 'row',
       top: 50,
       paddingLeft: 14,
@@ -46,15 +48,16 @@ const styles = StyleSheet.create({
       borderBottomWidth: 1,  
       borderBottomColor: "#C9C6D7",      
       alignItems: 'center',
-      
     },
+
     headerTitleStyle: {
       position: 'absolute',
       textAlign: 'center',
       right: 0,
       left: 0,
-      fontWeight: "bold",
+      fontFamily: Ubuntu.bold,
       fontSize: globalStyles.large,
+      color: colors.purple200,
       marginBottom: 24
     },
     backButton: {

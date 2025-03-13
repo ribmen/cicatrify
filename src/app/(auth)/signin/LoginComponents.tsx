@@ -3,31 +3,13 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from "reac
 import { supabase } from "@/src/lib/supabase";
 import { router } from "expo-router";
 import { Ubuntu } from "@/src/constants/fonts";
+import { InputField } from "@/src/components/InputField";
+import colors from "@/src/constants/colors";
 
 export const WelcomeText: React.FC = () => (
   <View style={styles.welcomeContainer}>
     <Text style={styles.welcomeText}>Bem-vindo ao <Text style={styles.cicatrifyText}>cicatrify!</Text></Text>
     
-  </View>
-);
-
-interface InputFieldProps {
-  label: string;
-  value: string;
-  onChangeText: (text: string) => void;
-  secureTextEntry?: boolean;
-}
-
-const InputField: React.FC<InputFieldProps> = ({ label, value, onChangeText, secureTextEntry }) => (
-  <View style={styles.inputContainer}>
-    <Text style={styles.inputLabel}>{label}</Text>
-    <TextInput
-      style={styles.inputValue}
-      value={value}
-      onChangeText={onChangeText}
-      secureTextEntry={secureTextEntry}
-      placeholderTextColor="#C9C6D7"
-    />
   </View>
 );
 
@@ -120,7 +102,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: "#2C263C",
-    fontFamily: "Ubuntu",
+    fontFamily: colors.purple200,
     fontSize: 26,
     fontWeight: "700",
   },
@@ -128,27 +110,6 @@ const styles = StyleSheet.create({
     color: "#4A4063",
     fontFamily: "Ubuntu",
     fontSize: 14,
-    fontWeight: "400",
-  },
-  inputContainer: {
-    height: 56,
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderWidth: 1,
-    borderColor: "#C9C6D7",
-    borderRadius: 10,
-    gap: 8,
-  },
-  inputLabel: {
-    color: "#C9C6D7",
-    fontFamily: "Ubuntu",
-    fontSize: 10,
-    fontWeight: "400",
-  },
-  inputValue: {
-    color: "#4A4063",
-    fontFamily: "Ubuntu",
-    fontSize: 16,
     fontWeight: "400",
   },
   loginButton: {

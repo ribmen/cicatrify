@@ -1,19 +1,17 @@
-import { Text, StyleSheet, ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, ScrollView, View } from "react-native";
 import GenericHeader from "@/src/components/GenericHeader";
+import NovoPacienteCard from "./NovoPacienteCard";
 
-export default function Profile() {
+export default function NewPatient() {
 
   return(
-    <ScrollView style={{flex: 1}}>
+    <>
       <GenericHeader title="Novo paciente" hasArrowBack={true}/>
-      
-      <SafeAreaView style={styles.container}>
-        <Text>Página de cadastro de paciente</Text>
-
-
-      </SafeAreaView>
-    </ScrollView>
+      <View style={styles.container}>
+        <NovoPacienteCard/>
+      </View>
+    
+    </>
   )
 
 }
@@ -21,7 +19,10 @@ export default function Profile() {
 const styles = StyleSheet.create({
   container:{
     flex: 1,
+    position: 'absolute',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '100%',
+    marginTop: 80
   }
 })

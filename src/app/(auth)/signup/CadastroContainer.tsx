@@ -10,7 +10,7 @@ import {
 import CadastroCard from "./CadastroComponents";
 import CadastroHeader from "./CadastroHeader";
 
-const LoginContainer: React.FC = () => {
+const CadastroContainer: React.FC = () => {
   return (
     <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginContainer;
+export default CadastroContainer;

@@ -24,7 +24,7 @@ export default function Profile() {
 
   return(
     <ScrollView style={{flex: 1}}>
-      <GenericHeader title="Pacientes" hasArrowBack={true}/>
+      <GenericHeader title="Pacientes" hasArrowBack={false}/>
       <SafeAreaView style={styles.container}>
         <Text>Página Perfil Login</Text>
 
