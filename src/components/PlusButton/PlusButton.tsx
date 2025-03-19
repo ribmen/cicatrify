@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, TouchableOpacity, View} from "react-native";
+import { StyleSheet, TouchableOpacity, View} from "react-native";
 import colors from "../../constants/colors";
 import { PlusIcon } from "./PlusIcon";
 
@@ -17,6 +17,7 @@ export const PlusButton: React.FC<PlusButtonProps> = ({
       onPress={onPress}
       disabled={disabled}
       activeOpacity={0.7}
+      style={styles.touchable}
     >
       <View style={styles.container}>
         <PlusIcon/>
@@ -27,10 +28,13 @@ export const PlusButton: React.FC<PlusButtonProps> = ({
 }
 
 const styles = StyleSheet.create({
+  touchable: {
+    position: 'absolute',
+    bottom: 80,
+    right: 40,
+    zIndex: 1
+  },
   container: {
-    position: 'fixed',
-    marginLeft: 260,
-    marginTop: 550,
     width: 62,
     height: 62,
     padding: 10,
