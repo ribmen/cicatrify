@@ -3,26 +3,39 @@ import { Ubuntu } from "@/src/constants/fonts";
 import { 
   StyleSheet, 
   View,
-  Text
+  Text,
+  Pressable
  } from "react-native"
 import { ForwardButton } from "./ForwardButton";
+import { Link, router } from "expo-router";
 
 interface CardProps {
   name: string;
-  onPress: () => void;
+  id: string;
 }
 
-export const Card: React.FC<CardProps> = ({name, onPress}) => {
+  function handlePressPaciente(patientId: string) {
+    router.push({
+      pathname: `/profile/PacienteScreen/[id]`,
+      params: {id: patientId}
+    })
+
+    console.log(patientId);
+  }
+
+export const PatientCard: React.FC<CardProps> = ({name, id}) => {
   return (
     <View style={styles.card}>
       <View style={{display: 'flex', flexDirection: "column"}}>
-        <View style={styles.textPlace}>
+      <View style={styles.textPlace}>
         <Text style={styles.inputLabel}>Paciente</Text>
         <Text style={styles.inputValue}>{name}</Text>
       </View>
 
       </View>
-      <ForwardButton onPress={onPress}/>
+
+        <ForwardButton onPress={() => handlePressPaciente(id)}/>
+      
     </View>
   )
 }

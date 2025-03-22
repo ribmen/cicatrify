@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from "@/src/contexts/AuthContext";
 import { supabase } from "@/src/lib/supabase";
-import { Text, StyleSheet, Button, Alert, View, FlatList, StatusBar } from "react-native";
+import { Text, StyleSheet, Button, Alert, View, FlatList, StatusBar, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import PlusButton from "@/src/components/PlusButton/PlusButton";
 import GenericHeader from "@/src/components/GenericHeader";
-import { router } from "expo-router";
+import { Link, router } from "expo-router";
 import { PatientCard } from '@/src/components/PatientsCard.tsx/Card';
 
 export default function Profile() {
@@ -25,10 +25,6 @@ export default function Profile() {
   function handlePress() {
     router.push('/(panel)/profile/NovoPacienteScreen/page')
   };
-
-  function handlePressPaciente() {
-    router.push('/(panel)/profile/PacienteScreen.tsx/page')
-  }
 
   async function getUserId() {
       const { data: { user } } = await supabase.auth.getUser();
@@ -64,9 +60,6 @@ export default function Profile() {
     fetchUserPatients();
   }, [])
 
-
-
-
   return(
     <View style={{flexGrow: 1}}>
       <GenericHeader title="Pacientes" hasArrowBack={false}/>
@@ -81,9 +74,10 @@ export default function Profile() {
           style={styles.patientsFlatList}
           data={patients}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <PatientCard name={item.name} onPress={handlePressPaciente}/>}
+          renderItem={({ item }) => <PatientCard name={item.name} id={item.id}/>}
           contentContainerStyle={{flexGrow: 1}}
         />
+
 
         <PlusButton onPress={handlePress}/>
 

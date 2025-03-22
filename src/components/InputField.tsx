@@ -14,6 +14,8 @@ export const InputField: React.FC<InputFieldProps> = ({ label, value, onChangeTe
       autoCapitalize={autoCapitalize}
       editable={editable}
       onPressIn={onPressIn}
+
+      
     />
   </View>
 );

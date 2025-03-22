@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,  
     borderBottomColor: "#C9C6D7",      
     alignItems: 'center',
+    marginBottom: 30
   },
 
   headerTitleStyle: {

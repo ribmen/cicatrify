@@ -22,7 +22,7 @@ export default function CadastroCard() {
   const [loading, setLoading] = useState(false);
 
   async function handleSignUp() {
-    setLoading(true);
+    setLoading(!loading);
 
     if (password !== confirmPassword) {
       Alert.alert("Erro", "As senhas não coincidem.");

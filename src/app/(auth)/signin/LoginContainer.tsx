@@ -7,7 +7,7 @@ import {
   Platform, 
   ScrollView 
 } from "react-native";
-import { BackgroundShapes } from "./BackgroundShape";
+import { BackgroundShapes } from "./BackgroundShapes";
 import { WelcomeText } from "./LoginComponents";
 import LoginCard from "./LoginComponents";
 

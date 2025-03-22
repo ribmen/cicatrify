@@ -66,9 +66,23 @@ function MainLayout() {
           headerShown: false
         }}
       />
+      
+      <Stack.Screen
+        name="(panel)/profile/PacienteScreen/[id]"
+        options={{ 
+          headerShown: false
+        }}
+      />
 
       <Stack.Screen
-        name="(panel)/profile/PacienteScreen.tsx/page"
+        name="(panel)/profile/PacienteScreen/imagensDo/[id]"
+        options={{ 
+          headerShown: false
+        }}
+      />
+
+      <Stack.Screen
+        name="(panel)/profile/PacienteScreen/NovaRegiaoDo/[id]"
         options={{ 
           headerShown: false
         }}
