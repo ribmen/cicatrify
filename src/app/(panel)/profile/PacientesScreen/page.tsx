@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import PlusButton from "@/src/components/PlusButton/PlusButton";
 import GenericHeader from "@/src/components/GenericHeader";
 import { Link, router } from "expo-router";
-import { PatientCard } from '@/src/components/PatientsCard.tsx/Card';
+import { GenericCard } from '@/src/components/GenericCard.tsx/Card';
 
 export default function Profile() {
   const { setAuth } = useAuth();
@@ -25,6 +25,15 @@ export default function Profile() {
   function handlePress() {
     router.push('/(panel)/profile/NovoPacienteScreen/page')
   };
+
+  function handlePressPaciente(patientId: string) {
+      router.push({
+        pathname: `/profile/PacienteScreen/[id]`,
+        params: {id: patientId}
+      })
+  
+      console.log(patientId);
+    }
 
   async function getUserId() {
       const { data: { user } } = await supabase.auth.getUser();
@@ -74,7 +83,13 @@ export default function Profile() {
           style={styles.patientsFlatList}
           data={patients}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <PatientCard name={item.name} id={item.id}/>}
+          renderItem={({ item }) => 
+            <GenericCard
+              name={item.name} 
+              id={item.id} 
+              label={"Paciente"}
+              onPress={() => handlePressPaciente(item.id)}
+            />}
           contentContainerStyle={{flexGrow: 1}}
         />
 

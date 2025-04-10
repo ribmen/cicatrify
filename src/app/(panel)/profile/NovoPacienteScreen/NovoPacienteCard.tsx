@@ -20,7 +20,6 @@ import colors from "@/src/constants/colors";
 
 export default function NovoPacienteCard() {
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [birthdate, setBirthdate] = useState('');
   const [loading, setLoading] = useState(false);
   const [date, setDate] = useState(new Date());
@@ -40,8 +39,7 @@ export default function NovoPacienteCard() {
       const { data, error } = await supabase
       .from('patients')
       .insert({ 
-        name: name, 
-        email: email, 
+        name: name,
         birthdate: formatDateSupabase(birthdate),
         nurse_id: await getUserId()
       })
@@ -115,8 +113,6 @@ export default function NovoPacienteCard() {
     <View style={styles.cardContainer}>
 
       <InputField label="Nome completo" value={name} onChangeText={setName} />
-
-      <InputField keyboardType="email-address" autoCapitalize="none" label="E-mail" value={email} onChangeText={setEmail} />
 
       {showPicker && (
         <DateTimePicker

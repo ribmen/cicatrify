@@ -75,7 +75,7 @@ function MainLayout() {
       />
 
       <Stack.Screen
-        name="(panel)/profile/PacienteScreen/imagensDo/[id]"
+        name="(panel)/profile/PacienteScreen/ImagensDo/[id]"
         options={{ 
           headerShown: false
         }}
