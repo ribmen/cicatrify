@@ -6,10 +6,14 @@ import {
 } from 'react-native';
 import ImageCardIcon from './ImageCardIcon';
 
-const ImageCard: React.FC = () => {
+interface ImageCardProps {
+  imageUrl: string;
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({ imageUrl }) => {
   return (
     <View style={styles.container}>
-      <ImageCardIcon />
+      <Image source={{uri: imageUrl }} style={styles.image} resizeMode='cover' />
     </View>
   );
 };
@@ -28,6 +32,7 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+    borderRadius: 8,
     aspectRatio: 1,
   },
 });

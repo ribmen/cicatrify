@@ -5,23 +5,24 @@ import colors from "@/src/constants/colors";
 import SearchFilterComponent from "./SearchFilter/SearchFilterComponent";
 import ImageCard from "./ImageCard";
 
-interface InputDesignProps {
-  // Component can be extended with props in the future if needed
+interface GalleryCardProps {
+  images: {id: string; image_url: string }[];
 }
 
-const GalleryCard: React.FC<InputDesignProps> = () => {
+
+const GalleryCard: React.FC<GalleryCardProps> = ({ images }) => {
   return (
     <View style={styles.container}>
       <SearchFilterComponent />
       <View style={styles.divider} />
-      <View style={styles.images}>
-        <FlatList  renderItem={<ImageCard />}/>
-        <ImageCard />
-        <ImageCard />
-        <ImageCard />
-        <ImageCard />
-        
-      </View>
+      <FlatList
+        data={images}
+        numColumns={3}
+        keyExtractor={(item) => item.id}
+        columnWrapperStyle={styles.row}
+        contentContainerStyle={styles.grid}
+        renderItem={({item}) => <ImageCard imageUrl={item.image_url} /> }
+      />
     </View>
   );
 };
@@ -50,8 +51,14 @@ const styles = StyleSheet.create({
     minHeight: 1,
     width: "100%",
   },
-  images: {
-  }
+  grid: {
+    gap: 24,
+  },
+  row: {
+    justifyContent: "space-between",
+    alignItems: "stretch",
+    marginBottom: 8,
+  },
 });
 
 export default GalleryCard;
