@@ -52,12 +52,11 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   grid: {
-    gap: 24,
+    gap: 16,
   },
   row: {
     justifyContent: "space-between",
     alignItems: "stretch",
-    marginBottom: 8,
   },
 });
 
