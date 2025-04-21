@@ -1,6 +1,6 @@
-import { GenericCard } from "@/src/components/GenericCard.tsx/Card";
+import { GenericCard } from "@/src/components/GenericCard/Card";
 import GenericHeader from "@/src/components/GenericHeader";
-import {PatientCard} from "@/src/components/PatientCard.tsx/Card";
+import { PatientCard } from "@/src/components/PatientCard/Card";
 import PlusButton from "@/src/components/PlusButton/PlusButton";
 import { supabase } from "@/src/lib/supabase";
 import { router, useLocalSearchParams } from "expo-router";

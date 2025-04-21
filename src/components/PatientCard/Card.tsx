@@ -1,8 +1,6 @@
 import colors from "@/src/constants/colors";
 import { StyleSheet, Text, View } from "react-native";
 import { BackgroundShapes } from "./BackgroundShapes";
-import globalStyles from "@/src/constants/globalStyles";
-import { Ubuntu } from "@/src/constants/fonts";
 import { TextInfo } from "./TextInfo";
 
 interface PatientCardProps {

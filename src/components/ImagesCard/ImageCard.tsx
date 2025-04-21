@@ -1,0 +1,35 @@
+import * as React from 'react';
+import {
+  View,
+  StyleSheet,
+  Image,
+} from 'react-native';
+import ImageCardIcon from './ImageCardIcon';
+
+const ImageCard: React.FC = () => {
+  return (
+    <View style={styles.container}>
+      <ImageCardIcon />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    aspectRatio: 1,
+    borderRadius: 8,
+    backgroundColor: '#C9C6D7',
+    paddingHorizontal: 10,
+    width: 83,
+    height: 83,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    aspectRatio: 1,
+  },
+});
+
+export default ImageCard;

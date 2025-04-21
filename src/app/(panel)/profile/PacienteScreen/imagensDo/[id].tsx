@@ -1,12 +1,13 @@
 import GenericHeader from "@/src/components/GenericHeader";
+import GalleryCard from "@/src/components/ImagesCard/GalleryCard";
+import ImagesCard from "@/src/components/ImagesCard/GalleryCard";
 import { PatientInfoCard } from "@/src/components/PatientInfoCard/PatientInfoCard";
 import PlusButton from "@/src/components/PlusButton/PlusButton";
 import { supabase } from "@/src/lib/supabase";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 
-// Tipagem do paciente retornado do Supabase
 interface Patient {
   name: string;
   regions: string[];
@@ -23,6 +24,10 @@ export default function ImagesOfPatient() {
   const [patientRegion, setPatientRegion] = useState<string>("");
 
   const { id, index } = useLocalSearchParams();
+
+  function handleNewPhoto() {
+
+  }
 
   async function fetchPatientData() {
     setLoading(true);
@@ -66,9 +71,13 @@ export default function ImagesOfPatient() {
     <View style={{ flexGrow: 1 }}>
       <GenericHeader hasArrowBack={true} title="Imagens" />
       <SafeAreaView style={styles.container}>
-        <PatientInfoCard icon="user" content={patientName} label="Paciente" />
-        <PatientInfoCard icon="landPlot" content={patientRegion} label="Região" />
-        <PlusButton />
+        <View style={styles.infoCards}>
+          <PatientInfoCard icon="user" content={patientName} label="Paciente" />
+          <PatientInfoCard icon="landPlot" content={patientRegion} label="Região" />
+        </View>
+
+        <GalleryCard />
+        <PlusButton onPress={handleNewPhoto}/>
       </SafeAreaView>
     </View>
   );
@@ -80,6 +89,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop: 24,
   },
+
+  infoCards: {
+    gap: 16
+  }
 })

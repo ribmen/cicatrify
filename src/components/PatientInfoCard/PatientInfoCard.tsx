@@ -25,14 +25,13 @@ const styles = StyleSheet.create({
 
   container: {
     flexDirection: "row",
-    height: 90,
+    height: 80,
     alignSelf: 'stretch',
     gap: 12,
     alignItems: 'center',
 
     borderRadius: 10,
     backgroundColor: colors.purple60,
-    marginBottom: 16,
     marginHorizontal: 24,
     paddingVertical: 16,
     paddingHorizontal: 24,

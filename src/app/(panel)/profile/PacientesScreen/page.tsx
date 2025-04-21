@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import PlusButton from "@/src/components/PlusButton/PlusButton";
 import GenericHeader from "@/src/components/GenericHeader";
 import { Link, router } from "expo-router";
-import { GenericCard } from '@/src/components/GenericCard.tsx/Card';
+import { GenericCard } from '@/src/components/GenericCard/Card';
 
 export default function Profile() {
   const { setAuth } = useAuth();
