@@ -1,16 +1,16 @@
 import * as React from "react";
 import { View, StyleSheet, FlatList } from "react-native";
-import ImageNewCard from "./ImageCard";
 import colors from "@/src/constants/colors";
 import SearchFilterComponent from "./SearchFilter/SearchFilterComponent";
 import ImageCard from "./ImageCard";
 
 interface GalleryCardProps {
   images: {id: string; image_url: string }[];
+  onImagePress: (id: string) => void;
 }
 
 
-const GalleryCard: React.FC<GalleryCardProps> = ({ images }) => {
+const GalleryCard: React.FC<GalleryCardProps> = ({ images, onImagePress }) => {
   return (
     <View style={styles.container}>
       <SearchFilterComponent />
@@ -21,7 +21,13 @@ const GalleryCard: React.FC<GalleryCardProps> = ({ images }) => {
         keyExtractor={(item) => item.id}
         columnWrapperStyle={styles.row}
         contentContainerStyle={styles.grid}
-        renderItem={({item}) => <ImageCard imageUrl={item.image_url} /> }
+        renderItem={({ item }) => (
+        <ImageCard
+          imageUrl={item.image_url}
+          imageId={item.id}
+          onPress={() => onImagePress(item.id)}
+        />
+      )} 
       />
     </View>
   );

@@ -3,17 +3,29 @@ import {
   View,
   StyleSheet,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 import ImageCardIcon from './ImageCardIcon';
 
 interface ImageCardProps {
   imageUrl: string;
+  imageId: string;
+  onPress: () => void;
 }
 
-const ImageCard: React.FC<ImageCardProps> = ({ imageUrl }) => {
+const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, onPress }) => {
   return (
     <View style={styles.container}>
-      <Image source={{uri: imageUrl }} style={styles.image} resizeMode='cover' />
+      <TouchableOpacity onPress={onPress}>
+        { imageUrl ?
+            <Image 
+              source={{uri: imageUrl }} 
+              style={styles.image} 
+              resizeMode='cover' />
+          : 
+            <ImageCardIcon />
+        }  
+      </TouchableOpacity>
     </View>
   );
 };

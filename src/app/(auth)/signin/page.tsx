@@ -72,7 +72,7 @@ export default function Login() {
             {loading ? 'Carregando...' : 'Acessar'}
           </Text>
         </Pressable>
-      <Link style={styles.link} href={"/(auth)/signup/page"}>
+      <Link style={styles.link} href={"/(auth)/signup/CadastroComponents"}>
       <Text>Ainda não possui uma conta? Cadastre-se</Text>
       </Link>
       </View>

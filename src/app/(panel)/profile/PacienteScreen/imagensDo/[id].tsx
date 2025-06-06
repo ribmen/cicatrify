@@ -10,6 +10,7 @@ import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import { ImageItem } from '@/src/utils/image';
+import ExpandedImageCard from '@/src/components/ExpandedImageCard/ExpandedImageCard';
 
 interface Patient {
   name: string;
@@ -28,6 +29,7 @@ export default function ImagesOfPatient() {
   const [patientRegion, setPatientRegion] = useState<string>("");
   const [images, setImages] = useState<ImageItem[]>([]);
   const [nurseId, setNurseId] = useState('');
+  const [openedImageId, setOpenedImageId] = useState<string | null>(null);
 
   const { id, index } = useLocalSearchParams();
   
@@ -44,6 +46,7 @@ export default function ImagesOfPatient() {
     } else if (data) {
       const signedImages = await Promise.all(
         data.map(async (item) => {
+          console.log("fetching images...")
           const {data: signedUrlData } = await supabase
             .storage
             .from('cicatrify-images')
@@ -66,6 +69,19 @@ export default function ImagesOfPatient() {
     }
   }, [patientRegion]);
 
+function getFormattedDateTimeLocale() {
+  const [date, time] = new Date().toLocaleString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  }).split(/[\u200E,\s]+/); // quebra por vírgula, espaço ou caractere oculto
+
+  return `${date} às ${time}`;
+}
+
+
   // abre a câmera e tira a foto e salva no supabase
   async function handleNewPhoto() {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -86,6 +102,8 @@ export default function ImagesOfPatient() {
       const fileName = `${Date.now()}-${photo.fileName || 'image'}.jpg`;
       const filePath = photo.uri;
       const base64 = photo.base64;
+      const photoDate = getFormattedDateTimeLocale();
+      console.log("DATA DA FOTO: ", photoDate);
       console.log(photo.uri);
 
       const { data, error: uploadError } = await supabase.storage
@@ -109,6 +127,7 @@ export default function ImagesOfPatient() {
               region: patientRegion,
               image_path: fileName,
               nurse_id: nurseId
+              
             },
           ]);
 
@@ -167,8 +186,18 @@ export default function ImagesOfPatient() {
           <PatientInfoCard icon="user" content={patientName} label="Paciente" />
           <PatientInfoCard icon="landPlot" content={patientRegion} label="Região" />
         </View>
+        
+        {openedImageId &&
+          <ExpandedImageCard 
+            image={images.find(img => img.id === openedImageId)?.image_url || ''} 
+            onClose={() => setOpenedImageId(null)} 
+          />
+        }
 
-        <GalleryCard images={images} />
+        <GalleryCard  
+          images={images}
+          onImagePress={(id) => setOpenedImageId(id)}
+        />
         <PlusButton onPress={handleNewPhoto}/>
       </SafeAreaView>
     </View>
